@@ -1,0 +1,44 @@
+steps:
+# Build the container image
+# update the gcr.io/[project-id]/[build-image-name]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/chronicle-cloud-167518/dev-teacher-web-ui', '.']
+
+# Push the container image to Container Registry
+# update the gcr.io/[project-id]/[build-image-name]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/chronicle-cloud-167518/dev-teacher-web-ui']
+
+# Deploy container image to Cloud Run
+# update the gcr.io/[project-id]/[build-image-name]
+# update RUN-SERVICE-NAME
+# update PORT. Ensure match with Apache Conf.
+# update REGION
+# update SERVICE ACCOUNT depending on ENVIRONMENT
+# update REGION
+# update ALLOW-UNAUTHENTICATED if NON-PUBLIC URL
+# update MAX-INSTANCES if needed
+# update TIMEOUT if needed
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'dev-teacher-web-ui'
+  - '--image'
+  - 'gcr.io/chronicle-cloud-167518/dev-teacher-web-ui'
+  - '--port'
+  - '80'
+  - '--region'
+  - 'us-east1'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
+  - '--service-account'
+  - 'sa-chroniclecloud-206-dev@chronicle-cloud-167518.iam.gserviceaccount.com'
+  - '--max-instances'
+  - '5'
+  - '--timeout'
+  - '60'
+# update image name. This is what is pushed in GCR
+images:
+- gcr.io/chronicle-cloud-167518/dev-teacher-web-ui
