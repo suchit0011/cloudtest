@@ -24,7 +24,7 @@
     "ang-music-player": "0.0.2",
     "angular-tabs-component": "^1.0.6",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-bootstrap": "^5.6.1",
     "ngx-loader-spinner": "^1.0.0",
     "ngx-loading": "^8.0.0",
